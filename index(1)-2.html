@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8e8ef">
+<title>Daily Walking in His Footsteps</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fff8fb;color:#604858;font-family:Georgia,serif;line-height:1.7}
+header{text-align:center;background:#f8e4ed;padding:30px 15px}
+header h1{color:#a64e78;font-size:28px}
+header p{font-style:italic}
+nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:12px;background:white}
+nav a{color:#a64e78;text-decoration:none;border:1px solid #edccda;border-radius:20px;padding:6px 10px;font-size:13px}
+main{max-width:700px;margin:auto;padding:14px}
+.card{background:white;border:1px solid #f0d8e3;border-radius:17px;padding:20px;margin:16px 0;box-shadow:0 3px 12px #b8759015}
+h2{color:#a64e78}
+.verse{font-size:21px;font-style:italic;color:#82415e}
+.ref{font-weight:bold;color:#a64e78}
+button{background:#b65d84;color:white;border:0;border-radius:22px;padding:10px 16px;margin:5px;cursor:pointer}
+textarea{width:100%;min-height:120px;padding:12px;border:1px solid #e8c7d5;border-radius:10px;font:inherit}
+footer{text-align:center;padding:25px;color:#95677c}
+</style>
+</head>
+<body>
+<header>
+<div style="font-size:32px">🌷 🌸 🌷</div>
+<h1>Daily Walking in His Footsteps</h1>
+<p>Following Jesus, one day at a time.</p>
+</header>
+<nav>
+<a href="#daily">Bible Verse</a>
+<a href="#reflection">Reflection</a>
+<a href="#prayer">Prayer</a>
+<a href="#journal">My Journal</a>
+<a href="#saved">Saved Verses</a>
+<a href="#support">Support</a>
+</nav>
+<main>
+<section class="card" id="daily">
+<h2>🌿 Today's Bible Verse</h2>
+<p class="verse">"This is the day which the LORD hath made; we will rejoice and be glad in it."</p>
+<p class="ref">Psalm 118:24 (KJV)</p>
+<button onclick="saveVerse()">♡ Save This Verse</button>
+</section>
+
+<section class="card" id="reflection">
+<h2>💗 Today's Reflection</h2>
+<h3>Walk with God Today</h3>
+<p>Every new day is an opportunity to draw closer to God. Whatever yesterday brought, we can begin today with faith, gratitude, and trust in His promises.</p>
+<p>God invites us to walk with Him through every decision, challenge, and blessing. We do not need to face life alone. When we place our trust in Him, He gives us strength to continue.</p>
+<h3>Life Lessons</h3>
+<ul>
+<li>Begin each day with gratitude.</li>
+<li>Trust God even when the future is uncertain.</li>
+<li>Make time for prayer and Bible study.</li>
+<li>Share God's love with others.</li>
+</ul>
+</section>
+
+<section class="card" id="prayer">
+<h2>🙏 Today's Prayer</h2>
+<p>Heavenly Father, thank You for the gift of another day. Teach me to walk with You, trust Your promises, and follow Your Word. Guide my thoughts, words, and actions. Help me become a blessing to others. In Jesus' name, Amen.</p>
+</section>
+
+<section class="card" id="journal">
+<h2>📝 My Personal Journal</h2>
+<p>What is God teaching you today?</p>
+<textarea id="journalText" placeholder="Write your thoughts, prayers and reflections here..."></textarea>
+<button onclick="saveJournal()">Save My Reflection</button>
+<p id="journalStatus"></p>
+</section>
+
+<section class="card" id="saved">
+<h2>📖 My Favourite Bible Verses</h2>
+<div id="savedVerses">No saved verses yet.</div>
+</section>
+
+<section class="card" id="support">
+<h2>🌷 Support Our Ministry</h2>
+<p>Help us continue sharing God's Word and encouraging hearts through daily devotionals. Your support is voluntary and deeply appreciated. Thank you for helping us keep these devotionals free for everyone.</p>
+<a href="https://paypal.me/JodelynVella" target="_blank" rel="noopener">
+<button>Support through PayPal 💗</button>
+</a>
+</section>
+</main>
+<footer>
+<p>Daily Walking in His Footsteps 🌸</p>
+<p>Let us grow in faith, one day at a time.</p>
+<p>All glory belongs to God.</p>
+</footer>
+
+<script>
+function saveVerse(){
+ let verses=JSON.parse(localStorage.getItem('myVerses')||'[]');
+ let verse='"This is the day which the LORD hath made; we will rejoice and be glad in it." - Psalm 118:24 (KJV)';
+ if(!verses.includes(verse)){verses.push(verse);localStorage.setItem('myVerses',JSON.stringify(verses));}
+ showVerses();
+ alert('Verse saved to your favourites!');
+}
+function showVerses(){
+ let verses=JSON.parse(localStorage.getItem('myVerses')||'[]');
+ document.getElementById('savedVerses').innerHTML=verses.length?verses.map(v=>'<p>'+v+'</p>').join(''):'No saved verses yet.';
+}
+function saveJournal(){
+ localStorage.setItem('myJournal',document.getElementById('journalText').value);
+ document.getElementById('journalStatus').textContent='Your reflection has been saved on this device. 🌷';
+}
+document.getElementById('journalText').value=localStorage.getItem('myJournal')||'';
+showVerses();
+</script>
+</body>
+</html>
